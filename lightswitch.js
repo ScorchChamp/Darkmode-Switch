@@ -87,7 +87,7 @@ input:checked + .slider:before {
 
 
 const section = document.querySelector('body');
-recurseChildren(section, function(section) {
+recurseChildren(section, function (section) {
   const style = window.getComputedStyle(section);
   section.style.color = style.color;
   section.style.backgroundColor = style.backgroundColor;
@@ -95,7 +95,7 @@ recurseChildren(section, function(section) {
 
 toggleSwitchInput.addEventListener('change', () => {
   const section = document.querySelector('body');
-  recurseChildren(section, function(section) {
+  recurseChildren(section, function (section) {
     const style = window.getComputedStyle(section);
     section.style.color = rgbSwitch(style.color);
     section.style.backgroundColor = rgbSwitch(style.backgroundColor);
@@ -103,8 +103,8 @@ toggleSwitchInput.addEventListener('change', () => {
 });
 
 function rgbSwitch(c) {
-  const r = c.match(/\d+/g).map(x => 255-x)
-  if (r.length == 4 && r[r.length-1] == 255) return c
+  const r = c.match(/\d+/g).map(x => 255 - x)
+  if (r.length == 4 && r[r.length - 1] == 255) return c
   return `rgb(${r.join(', ')})`
 }
 
