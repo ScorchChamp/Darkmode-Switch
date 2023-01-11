@@ -112,14 +112,14 @@ function recurseChildren(section, callback) {
   }
 }
 
-window.addEventListener("load", function() {
-  if (localStorage.getItem('dark-mode') === 'true') {
-    toggleSwitchInput.checked = true;
-    const section = document.querySelector('body');
-    recurseChildren(section, function (section) {
-      const style = window.getComputedStyle(section);
-      section.style.color = rgbSwitch(style.color);
-      section.style.backgroundColor = rgbSwitch(style.backgroundColor);
-    });
-  }
-})
+// window.addEventListener("load", function() {
+//   if (localStorage.getItem('dark-mode') === 'true') {
+//     toggleSwitchInput.checked = true;
+//     const section = document.querySelector('body');
+//     recurseChildren(section, function (section) {
+//       const style = window.getComputedStyle(section);
+//       section.style.color = rgbSwitch(style.color);
+//       section.style.backgroundColor = rgbSwitch(style.backgroundColor);
+//     });
+//   }
+// })
