@@ -112,7 +112,7 @@ function recurseChildren(section, callback) {
   }
 }
 
-window.onload = function exampleFunction() {
+window.addEventListener("load", function() {
   if (localStorage.getItem('dark-mode') === 'true') {
     toggleSwitchInput.checked = true;
     const section = document.querySelector('body');
@@ -122,4 +122,4 @@ window.onload = function exampleFunction() {
       section.style.backgroundColor = rgbSwitch(style.backgroundColor);
     });
   }
-}
+})
