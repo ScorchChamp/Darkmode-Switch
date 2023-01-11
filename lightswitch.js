@@ -90,24 +90,36 @@ recurseChildren(section, function (section) {
 });
 
 toggleSwitchInput.addEventListener('change', () => {
+  localStorage.setItem('dark-mode', localStorage.getItem('dark-mode') === 'true' ? 'false' : 'true');
   const section = document.querySelector('body');
   recurseChildren(section, function (section) {
     const style = window.getComputedStyle(section);
     section.style.color = rgbSwitch(style.color);
     section.style.backgroundColor = rgbSwitch(style.backgroundColor);
-    });
   });
-  
-  function rgbSwitch(c) {
-    const r = c.match(/\d+/g).map(x => 255 - x)
-    if (r.length == 4 && r[r.length - 1] == 255) return c
-    return `rgb(${r.join(', ')})`
+});
+
+function rgbSwitch(c) {
+  const r = c.match(/\d+/g).map(x => 255 - x)
+  if (r.length == 4 && r[r.length - 1] == 255) return c
+  return `rgb(${r.join(', ')})`
+}
+
+function recurseChildren(section, callback) {
+  callback(section);
+  for (const child of section.children) {
+    recurseChildren(child, callback);
   }
-  
-  function recurseChildren(section, callback) {
-    callback(section);
-    for (const child of section.children) {
-      recurseChildren(child, callback);
-    }
+}
+
+window.onload = function exampleFunction() {
+  if (localStorage.getItem('dark-mode') === 'true') {
+    toggleSwitchInput.checked = true;
+    const section = document.querySelector('body');
+    recurseChildren(section, function (section) {
+      const style = window.getComputedStyle(section);
+      section.style.color = rgbSwitch(style.color);
+      section.style.backgroundColor = rgbSwitch(style.backgroundColor);
+    });
   }
-  
+}
