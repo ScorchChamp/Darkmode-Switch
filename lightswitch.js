@@ -83,11 +83,6 @@ document.head.insertAdjacentHTML("beforeend", `
 `);
 
 const section = document.querySelector('body');
-recurseChildren(section, function (section) {
-  const style = window.getComputedStyle(section);
-  section.style.color = style.color;
-  section.style.backgroundColor = style.backgroundColor;
-});
 
 toggleSwitchInput.addEventListener('change', () => {
   localStorage.setItem('dark-mode', localStorage.getItem('dark-mode') === 'true' ? 'false' : 'true');
@@ -112,14 +107,19 @@ function recurseChildren(section, callback) {
   }
 }
 
-// window.addEventListener("load", function() {
-//   if (localStorage.getItem('dark-mode') === 'true') {
-//     toggleSwitchInput.checked = true;
-//     const section = document.querySelector('body');
-//     recurseChildren(section, function (section) {
-//       const style = window.getComputedStyle(section);
-//       section.style.color = rgbSwitch(style.color);
-//       section.style.backgroundColor = rgbSwitch(style.backgroundColor);
-//     });
-//   }
-// })
+window.addEventListener("load", function() {
+  recurseChildren(section, function (section) {
+    const style = window.getComputedStyle(section);
+    section.style.color = style.color;
+    section.style.backgroundColor = style.backgroundColor;
+  });
+  if (localStorage.getItem('dark-mode') === 'true') {
+    toggleSwitchInput.checked = true;
+    const section = document.querySelector('body');
+    recurseChildren(section, function (section) {
+      const style = window.getComputedStyle(section);
+      section.style.color = rgbSwitch(style.color);
+      section.style.backgroundColor = rgbSwitch(style.backgroundColor);
+    });
+  }
+})
